@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class EmployController {
-    @GetMapping("/")
+    @PostMapping("/")
     public String WelcomePage()
     {
-        return "Welcome to welcome page";
+        return "Welcome to employee page";
     }
-    @GetMapping("/add")
+    @PostMapping("/add")
     public String AddEmploy()
     {
         return "Welcome to add employee page";
     }
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String SearchEmploy()
     {
         return "Welcome to search employee page";
@@ -31,7 +31,7 @@ public class EmployController {
     {
         return "Welcome to view all employee page";
     }
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String DeleteEmploy()
     {
         return "Welcome to delete employee page";
