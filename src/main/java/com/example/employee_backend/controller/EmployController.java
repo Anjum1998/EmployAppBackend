@@ -1,18 +1,22 @@
 package com.example.employee_backend.controller;
 
+import com.example.employee_backend.dao.EmployDao;
 import com.example.employee_backend.model.Employee;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class EmployController {
+    @Autowired
+    private EmployDao dao;
     @PostMapping("/")
     public String WelcomePage()
     {
         return "Welcome to employee page";
     }
+    @CrossOrigin(origins = "*")
     @PostMapping(path = "/add",consumes = "application/json",produces = "application/json")
     public String AddEmploy(@RequestBody Employee e)
     {
@@ -24,6 +28,7 @@ public class EmployController {
         System.out.println(e.getMobile().toString());
         System.out.println(e.getUsername().toString());
         System.out.println(e.getPassword().toString());
+        dao.save(e);
         return "Welcome to add employee page";
     }
     @PostMapping("/search")
@@ -36,10 +41,12 @@ public class EmployController {
     {
         return "Welcome to edit employee page";
     }
+    @CrossOrigin(origins = "*")
     @GetMapping("/view")
-    public String ViewAll()
+    public List<Employee> ViewAll()
     {
-        return "Welcome to view all employee page";
+
+        return (List<Employee>) dao.findAll();
     }
     @PostMapping("/delete")
     public String DeleteEmploy()
