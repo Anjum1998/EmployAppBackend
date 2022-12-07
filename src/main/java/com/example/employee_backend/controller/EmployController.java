@@ -35,10 +35,14 @@ public class EmployController {
         map.put("status","success");
         return map;
     }
-    @PostMapping("/search")
-    public String SearchEmploy()
+    @CrossOrigin(origins = "*")
+    @PostMapping(path="/search",consumes = "application/json",produces = "application/json")
+    public List<Employee> SearchEmploy(@RequestBody Employee e)
     {
-        return "Welcome to search employee page";
+        String empCode=String.valueOf(e.getEmpCode());
+        System.out.println(empCode);
+
+        return (List<Employee>) dao.SearchEmploy(e.getEmpCode());
     }
     @PostMapping("/edit")
     public String EditEmploy()
