@@ -5,7 +5,9 @@ import com.example.employee_backend.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class EmployController {
@@ -18,7 +20,7 @@ public class EmployController {
     }
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/add",consumes = "application/json",produces = "application/json")
-    public String AddEmploy(@RequestBody Employee e)
+    public Map<String,String> AddEmploy(@RequestBody Employee e)
     {
         System.out.println(e.getEmpCode());
         System.out.println(e.getEmpName().toString());
@@ -29,7 +31,9 @@ public class EmployController {
         System.out.println(e.getUsername().toString());
         System.out.println(e.getPassword().toString());
         dao.save(e);
-        return "Welcome to add employee page";
+        HashMap<String,String> map=new HashMap<>();
+        map.put("status","success");
+        return map;
     }
     @PostMapping("/search")
     public String SearchEmploy()
